@@ -20,6 +20,7 @@
 
             <div class="panel-body">
                 <form class="form-inline" method="POST" th:action="@{/convidados}" th:object="${convidado}" style="margin: 20px 0">
+                    <input type="number" name="id" id="id" th:value="${convidado.id}" style="display: none">
                     <div class="form-group">
                         <input type="text" class="form-control" th:field="*{nome}" placeholder="Nome">
                         <input type="text" class="form-control" th:field="*{quantidadeAconpanhantes}" placeholder="Aconpanhantes">
@@ -31,12 +32,15 @@
                         <tr>
                             <td>Nome</td>
                             <td>Aconpanhantes</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="convidado : ${convidados}">
                             <th th:text="${convidado.nome}"></th>
                             <th th:text="${convidado.quantidadeAconpanhantes}"></th>
+                            <th><a th:href="@{'/excluir/' + ${convidado.id}}" class="btn btn-primary">Excluir</a></th>
                         </tr>
                     </tbody>
                 </table>

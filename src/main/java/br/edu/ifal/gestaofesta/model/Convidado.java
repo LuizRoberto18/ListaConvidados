@@ -1,7 +1,16 @@
 package br.edu.ifal.gestaofesta.model;
 
-public class Convidado{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
+public class Convidado {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
     private String nome;
     private Integer quantidadeAconpanhantes;
 
@@ -13,6 +22,7 @@ public class Convidado{
         this.nome = nome;
         this.quantidadeAconpanhantes = quantidadeAconpanhantes;
     }
+    
     public String getNome() {
         return nome;
     }
@@ -27,6 +37,14 @@ public class Convidado{
 
     public void setQuantidadeAconpanhantes(Integer quantidadeAconpanhantes) {
         this.quantidadeAconpanhantes = quantidadeAconpanhantes;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     
