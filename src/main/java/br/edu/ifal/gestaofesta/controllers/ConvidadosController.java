@@ -19,7 +19,7 @@ public class ConvidadosController{
     Convidado convidado = new Convidado();
 
     
-@RequestMapping("/convidados")
+    @RequestMapping("/convidados")
     public ModelAndView listar(){
         ModelAndView mv = new ModelAndView("ListaConvidados.html");
         mv.addObject("convidados", convidados.findAll());
@@ -27,7 +27,7 @@ public class ConvidadosController{
         return mv;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/convidados/salvar")
     public ModelAndView salvar(Convidado convidado){
         this.convidados.save(convidado);
         return new ModelAndView("redirect:/convidados");
