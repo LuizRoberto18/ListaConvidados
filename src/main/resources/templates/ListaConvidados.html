@@ -9,6 +9,46 @@
         <title>Lista de Convidados</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"www.algaworks.com 31 crossorigin="anonymous"/>
+        <style>
+            input{
+                text-transform: uppercase;
+            }
+        </style>
+        <script>
+            function FormatarIds(ids) {
+                var idsFormatados = [];
+                for (var i = 0; i < ids.length; i++){
+                    var nova_str = ids[i].replace(/[^\w\s]/gi, ' ').replace('_', ' ').uppercase();
+                    idsFormatados.push(nova_str);
+                }
+                return idsFormatados;
+            }
+
+            function PegarTodosIds(){
+                var todosElementos = document.getElementsByTagName('*');
+                var TodosIds = [];
+                for (var i = 0, n = todosElementos.length; i < n; ++i) {
+                    var elemento = todosElementos[i];
+                    if (elemento.id) {
+                        TodosIds.push(elemento.id);
+                    }
+                    
+                }
+            }
+            function Buscar() {
+                var str = document.getElementById('id').value;
+                
+                var ids = PegarTodosIds();
+                var idsFormatados = FormatarIds(ids);
+                
+                if (idsFormatados.indexOf(str.uppercase()) > -1) {
+                    console.log(str + 'existe');
+                }else{
+                    console.log(str + 'nao existe');
+                }
+                
+            }
+        </script>
     </head>
 
     <body>
@@ -18,6 +58,11 @@
                 <h1 class="panel-title">Lista de Convidados</h1>
             </div>
 
+            <form method="POST" action="/procurarConvidado">
+            <input class="form-control mr-sm-2" type="search" placeholder="Procurar" name="nome" id="nome"
+            aria-label="Search" >
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="busca()">Pesquisar</button>
+            </form>
             <div class="panel-body">
                 <form class="form-inline" method="POST" th:action="@{/convidados/salvar}" th:object="${convidado}" style="margin: 20px 0">
                     <input type="number" name="id" id="id" th:value="${convidado.id}" style="display: none">
@@ -44,6 +89,8 @@
                         </tr>
                     </tbody>
                 </table>
+                
+            <p th:text="${msgErro}"></p>
             </div>
         </div>
     
